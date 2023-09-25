@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, session, redirect, url_for, flash
 from flask_bootstrap import Bootstrap
 from flask_moment import Moment
 from flask_wtf import FlaskForm
@@ -19,15 +19,21 @@ moment = Moment(app)
 
 @app.route('/',  methods=['GET', 'POST'])
 def index():
-    name = None
-    email = None
     form = Form()
     if form.validate_on_submit():
-        name = form.name.data
-        form.name.data = ''
-        email = form.email.data
-        form.email.data = ''
-    return render_template('index.html', form=form, name=name, email=email)
+        oldName, oldEmail = session.get('name'), session.get('email')
+        if ((form.email.data).find('utoronto') != -1):
+            session['uoftEmail'] = True
+        else:
+            session['uoftEmail'] = False
+        if oldName is not None and oldName != form.name.data:
+            flash('Looks like you have changed your name!')
+        session['name'] = form.name.data
+        if oldEmail is not None and oldEmail != form.email.data:
+            flash('Looks like you have changed your email!')
+        session['email'] = form.email.data
+        return redirect(url_for('index'))
+    return render_template('index.html', uoftEmail=session.get('uoftEmail'), form=form, name=session.get('name'), email=session.get('email'))
 
 @app.route('/user/<name>')
 def user(name):
