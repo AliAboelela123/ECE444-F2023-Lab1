@@ -1,1 +1,48 @@
-<h1>Hello World!</h1>
+<style>
+    container {margin: 20px}
+</style>
+
+{% extends "bootstrap/base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block scripts %}
+{{ super() }}
+{{ moment.include_moment() }}
+{% endblock %}
+
+{% block title %} Flasky {% endblock %}
+
+{% block navbar %}
+<div class= "navbar navbar-inverse" role="navigation">
+    <div class= "container">
+        <div>
+            <button type="button" class="navbar-toggle"
+             data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Flasky</a>
+        </div>
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li><a href="/">Home</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="page-header">
+        <h1>Hello, {% if name %}{{ name }}{% else %}Stranger{% endif %}!</h1>
+        <h1>{%if email %}Your UofT email is {{ email }} {% else %}{% endif %}</h1>
+    </div>
+</div>
+
+<div class="container">
+    {{ wtf.quick_form(form) }}
+</div>
+{% endblock %}
