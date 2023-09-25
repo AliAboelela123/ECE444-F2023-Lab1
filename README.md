@@ -12,3 +12,9 @@ I am Ali Aboelela an ECE student at UofT. This repo is a clone of https://github
 
 ## Activity 3
 ![Activity3](submission/Activity3.png)
+
+## Activity 4
+![Activity4_2](submission/Activity4_2.png)
+![Activity4_2](submission/activity4_3.png)
+![Activity4_2](submission/activity4_4.png)
+![Activity4_2](submission/activity4_5.png)
